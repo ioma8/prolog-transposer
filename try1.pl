@@ -17,7 +17,6 @@ ton_transpose(Ton, Semis, TransposedTon) :-
     ton_semi(Ton, N),
     (N1 #= N + Semis
         ; N1 #= N + Semis - 12),
-        N1 in 0..11,
     ton_semi(TransposedTon, N1).
 
 ton_fourth(Ton, Fourth) :-
