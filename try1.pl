@@ -33,3 +33,5 @@ harmonies(Tones, Root, Fourth, Fifth) :-
     length(Tones, 3),
     permutation([Root, Fourth, Fifth], Tones),
     root_harmony(Root, Fourth, Fifth).
+
+% usage eg: harmonies([g, c, _], Root, Fourth, Fifth).
