@@ -27,3 +27,41 @@ ton_transpose(Ton, Semis, TransposedTon) :-
     ton(Ton, N),
     N1 #= N + Semis,
     ton(TransposedTon, N1).
+
+root_harmony(Root, Fourth, Fifth) :-
+    ton(Root, N),
+    FourthNumber #= N + 5,
+    FifthNumber #= N + 7,
+    [N, FourthNumber, FifthNumber] ins 0..11,
+    ton(Fourth, FourthNumber),
+    ton(Fifth, FifthNumber).
+
+harmonies(Tones, Root, Fourth, Fifth) :-
+    length(Tones, 3),
+    Tones = [A, B, C],
+    root_harmony(Root, Fourth, Fifth),
+    (
+        Fifth = A,
+        Fourth = B,
+        Root = C
+    ;
+        Fifth = B,
+        Fourth = C,
+        Root = A
+    ;
+        Fifth = C,
+        Fourth = A,
+        Root = B
+    ;
+        Fifth = A,
+        Fourth = C,
+        Root = B
+    ;
+        Fifth = B,
+        Fourth = A,
+        Root = C
+    ;
+        Fifth = C,
+        Fourth = B,
+        Root = A
+    ).
