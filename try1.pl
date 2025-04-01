@@ -11,7 +11,10 @@ ton_semi(g, 7).
 ton_semi(gis, 8).
 ton_semi(a, 9).
 ton_semi(ais, 10).
-ton_semi(b, 11). 
+ton_semi(b, 11).
+
+chord_type(dur).
+chord_type(moll).
 
 ton_transpose(Ton, Semis, TransposedTon) :-
     ton_semi(Ton, N),
@@ -34,4 +37,34 @@ harmonies(Tones, Root, Fourth, Fifth) :-
     permutation([Root, Fourth, Fifth], Tones),
     root_harmony(Root, Fourth, Fifth).
 
-% usage eg: harmonies([g, c, _], Root, Fourth, Fifth).
+root_chorddur(Root, ChordTones) :-
+    ChordTones = [Root, ChordTone1, ChordTone2],
+    length(ChordTones, 3),
+    ton_transpose(Root, 4, ChordTone1),
+    ton_transpose(Root, 7, ChordTone2).
+
+root_chordmoll(Root, ChordTones) :-
+    ChordTones = [Root, ChordTone1, ChordTone2],
+    length(ChordTones, 3),
+    ton_transpose(Root, 3, ChordTone1),
+    ton_transpose(Root, 7, ChordTone2).
+
+root_chord(Root, ChordTones, ChordType) :-
+    chord_type(ChordType),
+    ChordType = dur,
+    root_chorddur(Root, ChordTones).
+
+root_chord(Root, ChordTones, ChordType) :-
+    chord_type(ChordType),
+    ChordType = moll,
+    root_chordmoll(Root, ChordTones).
+
+root_chord_universal(Root, ChordTones, ChordType) :-
+    chord_type(ChordType),
+    permutation(ChordTones, ChordTonesPerm),
+    root_chord(Root, ChordTonesPerm, ChordType).
+    
+% usage eg:
+% harmonies([g, c, _], Root, Fourth, Fifth).
+% root_chord(g, ChordTones, dur).
+% root_chord_universal(_, [c, X, Y], moll).
