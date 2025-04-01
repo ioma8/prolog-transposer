@@ -67,4 +67,4 @@ root_chord_universal(Root, ChordTones, ChordType) :-
 % usage eg:
 % harmonies([g, c, _], Root, Fourth, Fifth).
 % root_chord(g, ChordTones, dur).
-% root_chord_universal(_, [c, X, Y], moll).
+% root_chord_universal(Root, [c, e, Y], Type).
