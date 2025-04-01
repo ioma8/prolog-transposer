@@ -22,3 +22,8 @@ ton(Name, N) :-
     N #< 0,
     N1 #= N + 12,
     ton(Name, N1).
+
+ton_transpose(Ton, Semis, TransposedTon) :-
+    ton(Ton, N),
+    N1 #= N + Semis,
+    ton(TransposedTon, N1).
