@@ -14,11 +14,13 @@ ton_semi(ais, 10).
 ton_semi(b, 11).
 
 ton_semi(Name, N) :-
+    nonvar(N),
     N #> 11,
     N1 #= N - 12,
     ton_semi(Name, N1).
 
 ton_semi(Name, N) :-
+    nonvar(N),
     N #< 0,
     N1 #= N + 12,
     ton_semi(Name, N1).
@@ -40,28 +42,4 @@ harmonies(Tones, Root, Fourth, Fifth) :-
     length(Tones, 3),
     Tones = [A, B, C],
     root_harmony(Root, Fourth, Fifth),
-    (
-        Fifth = A,
-        Fourth = B,
-        Root = C
-    ;
-        Fifth = B,
-        Fourth = C,
-        Root = A
-    ;
-        Fifth = C,
-        Fourth = A,
-        Root = B
-    ;
-        Fifth = A,
-        Fourth = C,
-        Root = B
-    ;
-        Fifth = B,
-        Fourth = A,
-        Root = C
-    ;
-        Fifth = C,
-        Fourth = B,
-        Root = A
-    ).
+    permutation([Root, Fourth, Fifth], Tones).
