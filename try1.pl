@@ -63,6 +63,16 @@ root_chord_universal(Root, ChordTones, ChordType) :-
     chord_type(ChordType),
     permutation(ChordTones, ChordTonesPerm),
     root_chord(Root, ChordTonesPerm, ChordType).
+
+tab([e, b, g, d, a, e], 0).
+
+tab_row(Tones, Row) :-
+    length(Tones, 6),
+    Tones0th = [e, b, g, d, a, e],
+    maplist(ton_semi, Tones0th, Semis),
+    maplist(ton_semi, Tones, SemisT),
+    maplist(ton_transpose, Tones0th, SemisT, Tones),
+    Tones = [T1, T2, T3, T4, T5, T6].
     
 % usage eg:
 % harmonies([g, c, _], Root, Fourth, Fifth).
