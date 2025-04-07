@@ -18,9 +18,9 @@ chord_type(moll).
 
 ton_transpose(Ton, Semis, TransposedTon) :-
     ton_semi(Ton, N),
-    (N1 #= N + Semis
-        ; N1 #= N + Semis - 12),
-    ton_semi(TransposedTon, N1).
+    N1 #= N + Semis,
+    N2 #= N1 mod 12,
+    ton_semi(TransposedTon, N2).
 
 ton_fourth(Ton, Fourth) :-
     ton_transpose(Ton, 5, Fourth).
@@ -64,7 +64,7 @@ root_chord_universal(Root, ChordTones, ChordType) :-
     permutation(ChordTones, ChordTonesPerm),
     root_chord(Root, ChordTonesPerm, ChordType).
 
-tab([e, b, g, d, a, e], 0).
+/* tab([e, b, g, d, a, e], 0).
 
 tab_row(Tones, Row) :-
     length(Tones, 6),
@@ -72,7 +72,7 @@ tab_row(Tones, Row) :-
     maplist(ton_semi, Tones0th, Semis),
     maplist(ton_semi, Tones, SemisT),
     maplist(ton_transpose, Tones0th, SemisT, Tones),
-    Tones = [T1, T2, T3, T4, T5, T6].
+    Tones = [T1, T2, T3, T4, T5, T6]. */
     
 % usage eg:
 % harmonies([g, c, _], Root, Fourth, Fifth).
